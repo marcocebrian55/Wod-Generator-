@@ -21,6 +21,7 @@ sqlalchemy = "*"
 flask-bcrypt = "*"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
+requests = "*"
 
 [requires]
 python_version = "3.13"
