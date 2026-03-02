@@ -5,7 +5,6 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User,Exercise,Muscle,Equipment
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
-import requests
 
 api = Blueprint('api', __name__)
 
@@ -29,13 +28,13 @@ def singup():
     password = data.get ('password')
 
     if not email or not password:
-        return jsonify({"Error":"Email and password required"}), 400
+        return jsonify({"error":"Email and password required"}), 400
     
     existing_user = db.session.execute(db.select(User).where(
         User.email == email)).scalar_one_or_none()
     
     if existing_user:
-        return jsonify({"Error":"Email already exist"}), 400
+        return jsonify({"error":"Email already exist"}), 400
     
     new_user = User(email=email)
     new_user.set_password(password)
@@ -45,4 +44,25 @@ def singup():
 
     return jsonify({"Message":"User created usccessfully"}), 201
 
+@api.route('/login', methods=['POST'])
+def login():
+
+    data = request.get_json()
+    email = data.get ('email')
+    password = data.get ('password')
+
+    if not email or not password:
+        return jsonify({"error":"Email and password are required"}), 400
     
+    user = db.session.execute(db.select(User).where(
+        User.email == email)).scalar_one_or_none()
+    
+    if user is None:
+        return jsonify ({"error": "Invalided email or password"}), 401
+    
+    if user.check_password(password):
+        access_token = create_access_token(identity = str(user.id))
+        return jsonify({"Message":"Login successful", "token": access_token, "user": user.serialize()}), 200
+
+    else:
+        return jsonify ({"error": "Invalided email or password"}), 401

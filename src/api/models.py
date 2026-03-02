@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String, Boolean
+from sqlalchemy import String, Boolean, Integer, ForeignKey, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from flask_bcrypt import generate_password_hash
+from flask_bcrypt import generate_password_hash, check_password_hash
 from typing import Optional
 
 db = SQLAlchemy()
@@ -115,7 +115,7 @@ class Workout (db.Model):
 
 class WorkoutExercise(db.Model):
     __tablename__ = "workout_exercises"
-    
+
     id: Mapped[int] = mapped_column(primary_key=True)
     workout_id: Mapped[int] = mapped_column(
         db.ForeignKey("workout.id"), nullable=False)
@@ -135,12 +135,12 @@ class WorkoutExercise(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "workout_id" :self.workout_id,
-            "exercise_id":self.exercise_id,
+            "workout_id": self.workout_id,
+            "exercise_id": self.exercise_id,
             "exercise_name": self.exercise.name if self.exercise else None,
             "order": self.order,
             "reps": self.reps,
-            "percent_of_max":self.percent_of_max
+            "percent_of_max": self.percent_of_max
 
 
         }
@@ -156,6 +156,9 @@ class User(db.Model):
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password).decode('utf-8')
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
     def serialize(self):
         return {
