@@ -102,3 +102,66 @@ def import_wger():
 
     db.session.commit()
     return jsonify({"msg": "Se han guardado los ejercicios nuevos"}), 200
+
+
+
+
+
+
+@api.route('/import-equipment',methods= ['GET'])
+def import_equipment():
+    url = "https://wger.de/api/v2/equipment/"
+    response = requests.get(url)
+    
+    if response.status_code != 200:
+        return jsonify ({"ms": "No puede conectar con la Api externa"}),200
+    
+    data = response.json()
+    print(data)
+    equipamiento_lista= data.get('results',[])
+    print(f"He recibido {len(equipamiento_lista)} equipamientos de la API")
+
+    for item in equipamiento_lista:
+        nombre_equipamiento = item.get('name')
+
+        if nombre_equipamiento is None or nombre_equipamiento == "":
+            continue
+
+        nuevo_equipo = Equipment(
+            name = nombre_equipamiento
+        )
+        db.session.add(nuevo_equipo)
+    
+    db.session.commit()
+    return jsonify({"msg": "Se han guardado los ejercicios nuevos"}), 200    
+
+
+
+
+
+@api.route('/import-muscles',methods= ['GET'])
+def import_muscles():
+    url = "https://wger.de/api/v2/muscle/"
+    response = requests.get(url)
+    
+    if response.status_code != 200:
+        return jsonify ({"ms": "No puede conectar con la Api externa"}),200
+    
+    data = response.json()
+    print(data)
+    musculos_lista= data.get('results',[])
+    print(f"He recibido {len(musculos_lista)} musculos de la API")
+
+    for item in musculos_lista:
+        nombre_musculo = item.get('name_en')
+
+        if nombre_musculo is None or nombre_musculo == "":
+            continue
+
+        nuevo_musculo = Muscle(
+            name = nombre_musculo
+        )
+        db.session.add(nuevo_musculo)
+    
+    db.session.commit()
+    return jsonify({"msg": "Se han guardado los ejercicios nuevos"}), 200 
