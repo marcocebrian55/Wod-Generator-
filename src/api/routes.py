@@ -69,6 +69,25 @@ def login():
         return jsonify({"Message": "Login successful", "token": access_token, "user": user.serialize()}), 200
 
     else:
+       return jsonify ({"error": "Invalided email or password"}), 401
+    
+@api.route('/profile', methods=['GET'])
+@jwt_required()
+def profile():
+
+    user_id = get_jwt_identity()
+
+    user = db.session.execute(
+        db.select(User).where(User.id == int(user_id))
+    ).scalar_one_or_none()
+
+    if user is None:
+        return jsonify({"error": "User not found"}), 404
+ 
+    return jsonify({
+        "message": "Profile data",
+        "user": user.serialize()
+    }), 200
         return jsonify({"error": "Invalided email or password"}), 401
 
 
