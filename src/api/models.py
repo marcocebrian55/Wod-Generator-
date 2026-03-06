@@ -132,6 +132,29 @@ class WorkoutExercise(db.Model):
     # esta relacion no tiene backpopulates porque es unidireccional, pocas veces va s preguntar a un ejercicio en cuantos entrenamientos aparece.
     exercise: Mapped["Exercise"] = relationship()
 
+class FavoriteWorkout(db.Model):
+    __tablename__ = "favorite_workout"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("user.id"), nullable=False
+    )
+
+    workout_id: Mapped[int] = mapped_column(
+        ForeignKey("workout.id"), nullable=False
+    )
+
+    user: Mapped["User"] = relationship("User")
+    workout: Mapped["Workout"] = relationship("Workout")
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "workout_id": self.workout_id
+        }
+
     def serialize(self):
         return {
             "id": self.id,

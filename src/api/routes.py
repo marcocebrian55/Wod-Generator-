@@ -2,10 +2,9 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Exercise, Muscle, Equipment
+from api.models import db, User, Exercise, Muscle, Equipment, Workout, FavoriteWorkout, WorkoutExercise
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
-import requests
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 
 api = Blueprint('api', __name__)
@@ -89,6 +88,84 @@ def profile():
         "user": user.serialize()
     }), 200
     return jsonify({"error": "Invalided email or password"}), 401
+
+@api.route('/favorites/<int:workout_id>', methods=['POST'])
+@jwt_required()
+def add_favorite(workout_id):
+
+    user_id = get_jwt_identity()
+
+    workout = db.session.get(Workout, workout_id)
+
+    if workout is None:
+        return jsonify({"error": "Workout not found"}), 404
+
+    existing_favorite = db.session.execute(
+        db.select(FavoriteWorkout).where(
+            FavoriteWorkout.user_id == int(user_id),
+            FavoriteWorkout.workout_id == workout_id
+        )
+    ).scalar_one_or_none()
+
+    if existing_favorite:
+        return jsonify({"error": "Workout already in favorites"}), 400
+
+    favorite = FavoriteWorkout(
+        user_id=int(user_id),
+        workout_id=workout_id
+    )
+
+    db.session.add(favorite)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Workout added to favorites"
+    }), 201
+
+@api.route('/favorites', methods=['GET'])
+@jwt_required()
+def get_favorites():
+
+    user_id = get_jwt_identity()
+
+    favorites = db.session.execute(
+        db.select(FavoriteWorkout).where(
+            FavoriteWorkout.user_id == int(user_id)
+        )
+    ).scalars().all()
+
+    results = []
+
+    for fav in favorites:
+        results.append({
+            "favorite_id": fav.id,
+            "workout": fav.workout.serialize()
+        })
+
+    return jsonify(results), 200
+
+@api.route('/favorites/<int:workout_id>', methods=['DELETE'])
+@jwt_required()
+def remove_favorite(workout_id):
+
+    user_id = get_jwt_identity()
+
+    favorite = db.session.execute(
+        db.select(FavoriteWorkout).where(
+            FavoriteWorkout.user_id == int(user_id),
+            FavoriteWorkout.workout_id == workout_id
+        )
+    ).scalar_one_or_none()
+
+    if favorite is None:
+        return jsonify({"error": "Favorite not found"}), 404
+
+    db.session.delete(favorite)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Workout removed from favorites"
+    }), 200
 
 
 @api.route('/import-wger', methods=['GET'])
@@ -184,3 +261,6 @@ def import_muscles():
     
     db.session.commit()
     return jsonify({"msg": "Se han guardado los ejercicios nuevos"}), 200 
+
+# Eliminar esto:
+
