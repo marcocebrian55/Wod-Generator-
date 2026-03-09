@@ -41,6 +41,9 @@ def generate_workout(user_id, muscle_id, equipment_ids, max_time, workout_name):
         type=tipo_rutina,
         time=max_time
     )
+
+    db.session.add(nuevo_entrenamiento)
+
     for i, ex in enumerate(seleccionados):
         detalle = WorkoutExercise(
             exercise_id=ex.id,
@@ -49,5 +52,7 @@ def generate_workout(user_id, muscle_id, equipment_ids, max_time, workout_name):
             percent_of_max=75
         )
         nuevo_entrenamiento.workout_exercises.append(detalle)
+
+    db.session.comit()
 
     return nuevo_entrenamiento
