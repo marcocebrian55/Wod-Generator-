@@ -343,6 +343,6 @@ def delete_workout(workout_id):
     db.session.commit()
 
     return jsonify({"msg": f"Workout {workout_id} eliminado correctamente"}), 200
-    return jsonify({"msg": "Se han guardado los ejercicios nuevos"}), 200
+    
 
-# Eliminar esto:
+
