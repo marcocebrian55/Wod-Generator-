@@ -286,6 +286,7 @@ def import_muscles():
 
 
 @api.route('/workouts', methods=['POST'])
+@jwt_required()
 def create_workout():
     data = request.get_json()
 
@@ -316,6 +317,7 @@ def create_workout():
 
 
 @api.route('/user/<int:user_id>/workouts', methods=['GET'])
+@jwt_required()
 def get_user_workouts(user_id):
 
     user_workouts = Workout.query.filter_by(user_id=user_id).all()
@@ -324,6 +326,7 @@ def get_user_workouts(user_id):
 
 
 @api.route('/workouts/<int:workout_id>', methods=['PUT'])
+@jwt_required()
 def update_workout(workout_id):
     data = request.get_json()
 
@@ -353,6 +356,7 @@ def update_workout(workout_id):
 
 
 @api.route('/workouts/<int:workout_id>', methods=['DELETE'])
+@jwt_required()
 def delete_workout(workout_id):
     workout = Workout.query.get(workout_id)
 
