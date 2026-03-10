@@ -178,7 +178,7 @@ def remove_favorite(workout_id):
 @api.route('/import-wger', methods=['GET'])
 def import_wger():
 
-    url = "https://wger.de/api/v2/exerciseinfo/?language=2&status=2"
+    url = "https://wger.de/api/v2/exerciseinfo/?language=2&status=2&limit=100"
     response = requests.get(url)
     print(response)
     if response.status_code != 200:

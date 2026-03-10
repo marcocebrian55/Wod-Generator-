@@ -151,6 +151,9 @@ class WorkoutExercise(db.Model):
             "id": self.id,
             "workout_id": self.workout_id,
             "exercise_id": self.exercise_id,
+            "order": self.order,  
+            "reps": self.reps,    
+            "percent_of_max": self.percent_of_max, 
             "exercise": self.exercise.serialize() if self.exercise else None
         }
 
