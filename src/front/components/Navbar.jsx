@@ -1,19 +1,49 @@
 import { Link } from "react-router-dom";
+import logo from "../assets/img/Logo-png.png";
 
 export const Navbar = () => {
 
 	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
-				</div>
-			</div>
-		</nav>
+		<nav className="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top">
+      <div className="container">
+
+        {/* LOGO CLICKEABLE */}
+        <a className="navbar-brand" href="home.html">
+          <img src={logo} alt="Logo" className="logo-img" />
+        </a>
+
+        <div className="ms-auto">
+          <a href="login.html" className="btn custom-btn me-2">
+            Iniciar Sesión
+          </a>
+
+          <a href="register.html" className="btn custom-btn">
+            Registrarse
+          </a>
+        </div>
+
+      </div>
+    </nav>
+
+	// 	<nav class="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top">
+    //     <div class="container">
+
+    //         <!-- LOGO CLICKEABLE -->
+    //         <a class="navbar-brand" href="home.html">
+    //             <img src="/Imágenes/Logo png.png" alt="Logo" class="logo-img">
+    //         </a>
+
+    //         <div class="ms-auto">
+    //             <a href="login.html" class="btn custom-btn me-2">
+    //                 Iniciar Sesión
+    //             </a>
+    //             <a href="register.html" class="btn custom-btn">
+    //                 Registrarse
+    //             </a>
+    //         </div>
+    //     </div>
+    // </nav>
+
+		
 	);
 };
