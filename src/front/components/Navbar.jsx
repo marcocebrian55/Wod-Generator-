@@ -7,7 +7,6 @@ export const Navbar = () => {
 		<nav className="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top">
       <div className="container">
 
-        {/* LOGO CLICKEABLE */}
         <a className="navbar-brand" href="home.html">
           <img src={logo} alt="Logo" className="logo-img" />
         </a>
@@ -25,25 +24,5 @@ export const Navbar = () => {
       </div>
     </nav>
 
-	// 	<nav class="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top">
-    //     <div class="container">
-
-    //         <!-- LOGO CLICKEABLE -->
-    //         <a class="navbar-brand" href="home.html">
-    //             <img src="/Imágenes/Logo png.png" alt="Logo" class="logo-img">
-    //         </a>
-
-    //         <div class="ms-auto">
-    //             <a href="login.html" class="btn custom-btn me-2">
-    //                 Iniciar Sesión
-    //             </a>
-    //             <a href="register.html" class="btn custom-btn">
-    //                 Registrarse
-    //             </a>
-    //         </div>
-    //     </div>
-    // </nav>
-
-		
 	);
 };
