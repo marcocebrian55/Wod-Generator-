@@ -10,6 +10,7 @@ import { Home } from "./pages/Home";
 import { Single } from "./pages/Single";
 import { Demo } from "./pages/Demo";
 import { Profile} from "./pages/Profile";
+import {Aboutus} from "./pages/Aboutus";
 
 
 export const router = createBrowserRouter(
@@ -29,6 +30,7 @@ export const router = createBrowserRouter(
         <Route path="/demo" element={<Demo />} />
         <Route path="/profile" element={<Profile />} />
         
+        <Route path="/aboutus" element={<Aboutus />} />
       </Route>
     )
 );
