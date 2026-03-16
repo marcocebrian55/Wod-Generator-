@@ -300,8 +300,8 @@ def create_workout():
         user_id=data.get("user_id")
     )
     db.session.add(new_workout)
-    db.session.flush()  # para obtener el id antes de hacer commit
-
+    db.session.flush()  
+    
     for exercise in data.get("exercises"):
         new_relation = WorkoutExercise(
             workout_id=new_workout.id,

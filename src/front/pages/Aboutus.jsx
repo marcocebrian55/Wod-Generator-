@@ -38,7 +38,7 @@ export function Aboutus() {
                     <div className="col-md-4 mb-4">
                         <div className="card bg-dark border-secondary h-100 p-3 text-center">
                             <img 
-                                src="https://avatars.githubusercontent.com/u/211037302?v=4&size=64" 
+                                src="public/IMAGES/Foto_Documento (1).png" 
                                 className="rounded-circle mx-auto mt-3" 
                                 style={{ width: "120px", height: "120px", objectFit: "cover", border: "3px solid #dc3545" }}
                                 alt="Atleta 2"
