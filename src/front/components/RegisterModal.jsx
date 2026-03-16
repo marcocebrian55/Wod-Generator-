@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { registerUser } from "../services/backendServices";
+import logo from "../assets/img/Logo-png.png";
+import "../styles/auth.css";
 
-export const RegisterModal = ({ show, onClose }) => {
+export const RegisterModal = ({ show, onClose, openLogin }) => {
 
     const [formData, setFormData] = useState({
+        name: "",
         email: "",
         password: "",
         confirmPassword: ""
@@ -30,99 +33,132 @@ export const RegisterModal = ({ show, onClose }) => {
         });
 
         if (response.error) {
+
             alert(response.error);
+
         } else {
-            alert("Usuario registrado correctamente");
+
+            alert("Usuario creado correctamente");
+
             onClose();
+
         }
     };
 
     if (!show) return null;
 
     return (
-        <div className="modal fade show d-block">
-            <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content shadow-lg border-0">
 
-                    <div className="modal-header border-0">
-                        <h4 className="modal-title fw-bold">Crear cuenta</h4>
-                        <button className="btn-close" onClick={onClose}></button>
-                    </div>
+        <div className="auth-overlay">
+
+            <div className="auth-card auth-card-register">
+
+                <button className="auth-close" onClick={onClose}>
+                    ×
+                </button>
+
+                <div className="auth-top-bar"></div>
+
+                <img src={logo} className="auth-logo" />
+
+                <div className="auth-body">
+
+                    <h3 className="auth-title">
+                        Regístrate
+                    </h3>
+
+                    <p className="text-center mb-3">
+                        Crea una Cuenta
+                    </p>
 
                     <form onSubmit={handleSubmit}>
 
-                        <div className="modal-body px-4">
+                        <div className="auth-input-group">
 
-                            <div className="mb-3">
-                                <label className="form-label fw-semibold">
-                                    Email
-                                </label>
+                            <i className="fas fa-user auth-icon"></i>
 
-                                <input
-                                    type="email"
-                                    name="email"
-                                    className="form-control form-control-lg"
-                                    placeholder="ejemplo@email.com"
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-
-                            <div className="mb-3">
-                                <label className="form-label fw-semibold">
-                                    Contraseña
-                                </label>
-
-                                <input
-                                    type="password"
-                                    name="password"
-                                    className="form-control form-control-lg"
-                                    placeholder="Introduce tu contraseña"
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-
-                            <div className="mb-3">
-                                <label className="form-label fw-semibold">
-                                    Confirmar contraseña
-                                </label>
-
-                                <input
-                                    type="password"
-                                    name="confirmPassword"
-                                    className="form-control form-control-lg"
-                                    placeholder="Repite tu contraseña"
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Nombre Completo"
+                                className="form-control auth-input"
+                                onChange={handleChange}
+                            />
 
                         </div>
 
-                        <div className="modal-footer border-0 px-4 pb-4">
+                        <div className="auth-input-group">
 
-                            <button
-                                type="button"
-                                className="btn btn-outline-secondary"
-                                onClick={onClose}
-                            >
-                                Cancelar
-                            </button>
+                            <i className="fas fa-envelope auth-icon"></i>
 
-                            <button
-                                type="submit"
-                                className="btn btn-dark px-4"
-                            >
-                                Crear cuenta
-                            </button>
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Correo Electrónico"
+                                className="form-control auth-input"
+                                onChange={handleChange}
+                                required
+                            />
 
                         </div>
+
+                        <div className="auth-input-group">
+
+                            <i className="fas fa-lock auth-icon"></i>
+
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Crear Contraseña"
+                                className="form-control auth-input"
+                                onChange={handleChange}
+                                required
+                            />
+
+                        </div>
+
+                        <div className="auth-input-group">
+
+                            <i className="fas fa-lock auth-icon"></i>
+
+                            <input
+                                type="password"
+                                name="confirmPassword"
+                                placeholder="Confirmar Contraseña"
+                                className="form-control auth-input"
+                                onChange={handleChange}
+                                required
+                            />
+
+                        </div>
+
+                        <button className="btn auth-btn">
+                            Crear Cuenta
+                        </button>
 
                     </form>
 
+                    <p className="text-center mt-3">
+
+                        ¿Ya tienes una cuenta?
+                        <br />
+
+                        <span
+                            className="auth-link"
+                            onClick={openLogin}
+                        >
+                            Iniciar Sesión
+                        </span>
+
+                    </p>
+
+                    
+
                 </div>
+
             </div>
+
         </div>
+
     );
 };

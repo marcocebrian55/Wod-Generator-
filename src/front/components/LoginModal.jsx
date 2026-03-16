@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { loginUser } from "../services/backendServices";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/img/Logo-png.png";
+import "../styles/auth.css";
 
-export const LoginModal = ({ show, onClose }) => {
+export const LoginModal = ({ show, onClose, openRegister }) => {
 
     const navigate = useNavigate();
 
@@ -27,15 +29,13 @@ export const LoginModal = ({ show, onClose }) => {
 
             localStorage.setItem("token", response.token);
 
-            alert("Login correcto");
-
             onClose();
 
             navigate("/generator");
 
         } else {
 
-            alert("Email o contraseña incorrectos");
+            alert("Credenciales incorrectas");
 
         }
     };
@@ -43,80 +43,80 @@ export const LoginModal = ({ show, onClose }) => {
     if (!show) return null;
 
     return (
-        <div className="modal fade show d-block">
-            <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content shadow-lg border-0">
 
-                    <div className="modal-header border-0">
-                        <h4 className="modal-title fw-bold">
-                            Iniciar sesión
-                        </h4>
+        <div className="auth-overlay">
 
-                        <button
-                            className="btn-close"
-                            onClick={onClose}
-                        ></button>
-                    </div>
+            <div className="auth-card">
+                <button className="auth-close" onClick={onClose}>
+                    ×
+                </button>
+
+                <div className="auth-top-bar"></div>
+
+                <img src={logo} className="auth-logo" />
+
+                <div className="auth-body">
+
+                    <h3 className="auth-title">
+                        Iniciar Sesión
+                    </h3>
 
                     <form onSubmit={handleSubmit}>
 
-                        <div className="modal-body px-4">
+                        <div className="auth-input-group">
 
-                            <div className="mb-3">
-                                <label className="form-label fw-semibold">
-                                    Email
-                                </label>
+                            <i className="fas fa-envelope auth-icon"></i>
 
-                                <input
-                                    type="email"
-                                    name="email"
-                                    className="form-control form-control-lg"
-                                    placeholder="ejemplo@email.com"
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-
-                            <div className="mb-4">
-                                <label className="form-label fw-semibold">
-                                    Contraseña
-                                </label>
-
-                                <input
-                                    type="password"
-                                    name="password"
-                                    className="form-control form-control-lg"
-                                    placeholder="Introduce tu contraseña"
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Correo Electrónico"
+                                className="form-control auth-input"
+                                onChange={handleChange}
+                                required
+                            />
 
                         </div>
 
-                        <div className="modal-footer border-0 px-4 pb-4">
+                        <div className="auth-input-group">
 
-                            <button
-                                type="button"
-                                className="btn btn-outline-secondary"
-                                onClick={onClose}
-                            >
-                                Cancelar
-                            </button>
+                            <i className="fas fa-lock auth-icon"></i>
 
-                            <button
-                                type="submit"
-                                className="btn btn-dark px-4"
-                            >
-                                Entrar
-                            </button>
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Contraseña"
+                                className="form-control auth-input"
+                                onChange={handleChange}
+                                required
+                            />
 
                         </div>
+
+                        <button className="btn auth-btn">
+                            Ingresar
+                        </button>
 
                     </form>
 
+                    <p className="text-center mt-3">
+                        ¿Aún no tienes una cuenta?
+                        <br />
+                        <span
+                            className="auth-link"
+                            onClick={openRegister}
+                        >
+                            Regístrate
+                        </span>
+                    </p>
+
+                    
+
                 </div>
+
             </div>
+
         </div>
+
     );
 };
