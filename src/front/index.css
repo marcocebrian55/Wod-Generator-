@@ -88,7 +88,7 @@ body {
   }
 }
 .animacion-entrada {
-    animation: deslizarSubir 0.6s ease-out; /* Dura 0.6 segundos */
+    animation: deslizarSubir 0.6s ease-out; 
 }
 
 .container {
@@ -103,7 +103,7 @@ body {
   width: 100%;
 }
 
-/* El primer contenedor (Personal) ocupa todo el ancho */
+
 .headerSection {
   background: #121212;
   padding: 2rem;
@@ -112,10 +112,10 @@ body {
   margin-bottom: 2rem;
 }
 
-/* El grid para los dos contenedores de abajo (50/50) */
+
 .bottomGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+  grid-template-columns: 1fr 1fr; 
   gap: 2rem;
 }
 
@@ -143,22 +143,22 @@ body {
   }
 }
 
-/* Nuevo Contenedor para el Carrusel (Ancho Completo) */
+
 .favoritesSection {
   background: #121212;
   padding: 2rem;
   border-radius: 8px;
-  border-top: 4px solid #dc3545; /* Borde superior para consistencia */
-  margin-top: 2rem; /* Espacio con el grid superior */
-  width: 100%; /* Ocupa todo el ancho */
+  border-top: 4px solid #dc3545; 
+  margin-top: 2rem; 
+  width: 100%; 
 }
 
-/* Contenedor interno para el carrusel (Flexbox para alineación horizontal) */
+
 .carouselContainer {
   display: flex;
-  overflow-x: auto; /* Habilita el desplazamiento horizontal */
-  gap: 1.5rem; /* Espacio entre las tarjetas del carrusel */
-  padding-bottom: 1rem; /* Espacio para la barra de desplazamiento */
+  overflow-x: auto; 
+  gap: 1.5rem;
+  padding-bottom: 1rem;
 }
 
 
