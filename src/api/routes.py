@@ -377,7 +377,11 @@ def handle_generate_workout():
     data = request.get_json()
 
     muscle_id = data.get("muscle_id")
-    max_time = data.get("max_time")
+    try:
+        max_time = int(data.get("max_time"))
+    except (TypeError, ValueError):
+        return jsonify({"msg": "El tiempo máximo debe ser un número válido"}), 400
+    
     equipment_ids = data.get("equipment_ids", [])
     workout_name = data.get("name") or "Rutina Auto"
 

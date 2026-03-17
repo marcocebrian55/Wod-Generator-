@@ -46,7 +46,7 @@ export const GeneratorView = ({ onGenerated, onClose }) => {
 
     return (
         <div className="modal-over d-flex align-items-center justify-content-center p-3">
-            {/* Contenedor con efecto Cristal y borde superior rojo */}
+            
             <div className="tarjeta-interna p-4 p-md-5 w-100 shadow-lg" style={{ maxWidth: "850px", borderTop: "4px solid #dc3545" }}>
                 <form onSubmit={handleSubmit}>
                     
@@ -56,7 +56,7 @@ export const GeneratorView = ({ onGenerated, onClose }) => {
                     </div>
 
                     <div className="row g-4">
-                        {/* COLUMNA 1: OBJETIVO Y TIEMPO */}
+                        
                         <div className="col-md-6 border-end border-secondary border-opacity-25 pe-md-4">
                             <label className="form-label font-oswald text-secondary small mb-3">GRUPO MUSCULAR TARGET</label>
                             <select 
@@ -88,7 +88,7 @@ export const GeneratorView = ({ onGenerated, onClose }) => {
                             </div>
                         </div>
 
-                        {/* COLUMNA 2: EQUIPAMIENTO */}
+                       
                         <div className="col-md-6 ps-md-4">
                             <label className="form-label font-oswald text-secondary small mb-3">MATERIAL DISPONIBLE</label>
                             <div className="p-3 border border-secondary rounded bg-black bg-opacity-40" style={{ maxHeight: "185px", overflowY: "auto" }}>
@@ -113,7 +113,7 @@ export const GeneratorView = ({ onGenerated, onClose }) => {
                         </div>
                     </div>
 
-                    {/* BOTONES DE ACCIÓN */}
+                    
                     <div className="d-flex flex-column flex-md-row gap-3 mt-5">
                         <button type="button" className="btn-outline-custom w-100 py-3 order-2 order-md-1" onClick={onClose}>
                             VOLVER

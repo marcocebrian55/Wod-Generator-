@@ -13,6 +13,7 @@ export const Home = () => {
     const [showCard, setShowCard] = useState(false);
 
     const handleGenerated = (data) => {
+        console.log("WOD recibido:", data);
         setWorkout(data);
         setShowGenerator(false);
         setShowCard(true);
@@ -75,8 +76,26 @@ export const Home = () => {
             <FeaturesSection />
 
 
+
+
             {showGenerator && (
-                <GeneratorView onGenerated={handleGenerated} onClose={() => setShowGenerator(false)} />
+                <GeneratorView
+                    onGenerated={handleGenerated}
+                    onClose={() => setShowGenerator(false)} />
+            )}
+
+            {showCard && workout && (
+                <div className="modal-over d-flex align-items-center justify-content-center p-3" style={{ zIndex: 9999 }}>
+                    <div >
+
+                        <button className="btn-simple-close" onClick={() => setShowCard(false)}>
+                            ×
+                        </button>
+
+
+                        <WorkoutCard workout={workout} isGenerated={true} />
+                    </div>
+                </div>
             )}
 
 

@@ -1,20 +1,20 @@
 import React from "react";
 
-export const WorkoutCard = ({ data }) => {
-    if (!data) return <div className="text-white text-center">Esperando un entrenamiento....</div>
+export const WorkoutCard = ({ workout }) => {
+    if (!workout) return <div className="text-white text-center">Esperando un entrenamiento....</div>
     return (
         <div className="card wod-card mx-auto shadow-lg border-0 mb-5" style={{ maxWidth: "600px", }
 
         }>
             <div className=" card-header wod-header p-4 text-center animacion-entrada">
                 <h2 className="display-6 fw-bold text-white mb-1">
-                    {data.name.toUpperCase()}
+                    {workout.name.toUpperCase()}
 
                 </h2>
                 <div className="d-flex justify-content-center gap-3 mt-2">
-                    <span className="badge bg-danger text-uppercase px-3 py-2">{data.type}</span>
+                    <span className="badge bg-danger text-uppercase px-3 py-2">{workout.type}</span>
                     <span className="text-secondary fw-bold align-self-center small">
-                        {data.time} MIN
+                        {workout.time} MIN
                     </span>
 
                 </div>
@@ -23,7 +23,7 @@ export const WorkoutCard = ({ data }) => {
             </div>
             <div className="card-body p-0">
                 <div className="list-group list-group-flush">
-                    {data.exercises && data.exercises.map ((item,index)=>(
+                    {workout.exercises && workout.exercises.map ((item,index)=>(
                         <div key={index} className="list-group-item wod-list-item py-3 px-4 d-flex justify-content-between align-items-center">
                             <div className="d-flex align-items-center">
                                 <span className="fs-3 wod-number me-3">
