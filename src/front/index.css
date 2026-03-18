@@ -166,6 +166,8 @@ body {
 .carouselContainer {
   display: flex;
   overflow-x: auto; 
+  gap: 1.5rem;
+  padding-bottom: 1rem;
   gap: 1.5rem; 
   padding-bottom: 1rem; 
 }

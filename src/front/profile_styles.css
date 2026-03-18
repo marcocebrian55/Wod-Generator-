@@ -1,0 +1,148 @@
+.settingsWrapper {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  color: white;
+}
+
+.singleCard {
+  background: #1a1a1a;
+  width: 100%;
+  max-width: 500px; 
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #333;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.avatarSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.avatarCircle {
+  width: 120px;
+  height: 120px;
+  background: #333;
+  border-radius: 50%;
+  border: 2px solid #cc0000;
+}
+
+/* 1. El Contenedor del Avatar */
+.avatarContainer {
+  /* Define el tamaño exacto del círculo aquí */
+  width: 150px;  /* O el tamaño que desees, ej: 120px */
+  height: 150px; /* Debe ser igual al ancho para un círculo perfecto */
+  
+  /* Hace el contenedor redondo */
+  border-radius: 50%;
+  
+  /* ESTO ES CRUCIAL: Corta cualquier parte de la imagen que sobresalga */
+  overflow: hidden;
+  
+  /* Estilos opcionales para que resalte (siguiendo tu estética) */
+  background-color: #333; /* Fondo gris oscuro si no hay imagen */
+  border: 3px solid #dc3545; /* Borde rojo de CrossFit */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra para darle profundidad */
+  
+  /* Para centrar la imagen si es más pequeña (aunque object-fit lo hace) */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 2. La Imagen dentro del Contenedor */
+.avatarContainer img {
+  /* Obliga a la imagen a ocupar todo el ancho y alto del contenedor */
+  width: 100%;
+  height: 100%;
+  
+  /* LA PROPIEDAD MÁGICA: */
+  /* Recorta la imagen para que llene el contenedor manteniendo su proporción, 
+     como una imagen de fondo con background-size: cover. 
+     Evita que la imagen se estire o se aplaste. */
+  object-fit: cover;
+  
+  /* Centra el recorte de la imagen (por defecto es center) */
+  object-position: center;
+}
+
+.changePhotoBtn {
+  background: none;
+  border: 1px solid #555;
+  color: #ccc;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.inputGroup {
+  margin-bottom: 20px;
+}
+
+.inputGroup label {
+  display: block;
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+select {
+  width: 100%;
+  background: #252525 !important;
+  border: 1px solid #444 !important;
+  padding: 12px !important;
+  border-radius: 6px !important;
+  color: #888 !important;
+  outline: none !important;
+}
+
+.inputGroup input,
+.inputGroup textarea {
+  width: 100%;
+  background: #252525;
+  border: 1px solid #444;
+  padding: 12px;
+  border-radius: 6px;
+  color: white;
+  outline: none;
+}
+
+.inputGroup input:focus {
+  border-color: #cc0000;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid #333;
+  margin: 30px 0;
+}
+
+.saveBtn {
+  width: 100%;
+  background: #cc0000;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.saveBtn:hover {
+  opacity: 0.9;
+}

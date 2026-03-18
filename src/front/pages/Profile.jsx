@@ -39,7 +39,7 @@ export const Profile = () => {
             <Link to="/" className="btn btn-dark" style={{ marginLeft: "auto", height: "35px" }}>
               <i className="fa-solid fa-right-from-bracket"></i>
             </Link>
-            <Link to="/" className="btn btn-dark" style={{ marginLeft: "auto", height: "35px" }}>
+            <Link to="/profile/settings" className="btn btn-dark" style={{ marginLeft: "auto", height: "35px" }}>
               <i className="fa-solid fa-gear"></i>
             </Link>
           </div>
