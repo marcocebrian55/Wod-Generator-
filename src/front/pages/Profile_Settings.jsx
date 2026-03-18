@@ -1,128 +1,105 @@
-import { Link } from "react-router-dom";
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from "react-router-dom"; 
 import "/src/front/profile_styles.css";
-import React, { useState, useRef } from 'react';
 
 export const Profile_Settings = () => {
-
+    const navigate = useNavigate();
+    const fileInputRef = useRef(null);
+    
+    
+    const [formData, setFormData] = useState({
+        username: "",
+        bio: "",
+        height: "",
+        weight: "",
+        main_exercise: ""
+    });
     const [image, setImage] = useState("https://images.icon-icons.com/3868/PNG/512/profile_circle_icon_242774.png");
 
-    // 2. Referencia para conectar el botón con el input oculto
-    const fileInputRef = useRef(null);
+    
+    useEffect(() => {
+        const loadUserData = async () => {
+            
+            console.log("Cargando datos del atleta desde el backend...");
+           
+        };
+        loadUserData();
+    }, []);
 
-    const handleEditPhotoClick = () => {
-        // Al hacer clic en el botón visible, activamos el input oculto
-        fileInputRef.current.click();
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            // Creamos una URL temporal para mostrar la imagen seleccionada
-            const imageUrl = URL.createObjectURL(file);
-            setImage(imageUrl);
-
-            // Aquí podrías enviar el 'file' a tu backend o Global State
-            console.log("Archivo listo para subir:", file);
+            setImage(URL.createObjectURL(file));
         }
-    }
+    };
+
+   
+    const handleSubmit = async (e) => {
+        e.preventDefault(); 
+        console.log("Guardando datos en la DB...", formData);
+        
+        
+        
+        
+        navigate("/profile"); 
+    };
 
     return (
         <div className="settingsWrapper gap-5">
             <div className="singleCard">
                 <h2 className="title">Información Personal</h2>
-
-                {/* SECCIÓN DE FOTO */}
                 <div className="avatarSection">
-                    {/* Contenedor de la foto */}
                     <div className="avatarContainer">
                         <img src={image} className="img" alt="Foto de Perfil" />
                     </div>
-
-                    {/* Input de tipo file OCULTO */}
-                    <input
-                        type="file"
-                        accept="image/*"
-                        ref={fileInputRef}
-                        style={{ display: "none" }}
-                        onChange={handleFileChange}
-                    />
-
-                    {/* Tu botón personalizado que dispara la acción */}
-                    <button
-                        className="btn btn-outline-danger btn-sm mt-2"
-                        onClick={handleEditPhotoClick}
-                    >
-                        <i className="fa-solid fa-camera me-2"></i>
-                        Cambiar Foto
+                    <input type="file" accept="image/*" ref={fileInputRef} style={{ display: "none" }} onChange={handleFileChange} />
+                    <button className="btn btn-outline-danger btn-sm mt-2" onClick={() => fileInputRef.current.click()}>
+                        <i className="fa-solid fa-camera me-2"></i> Cambiar Foto
                     </button>
                 </div>
 
-                {/* FORMULARIO ÚNICO */}
-                <form className="form">
+                
+                <form className="form" onSubmit={handleSubmit}>
                     <div className="inputGroup">
                         <label>Usuario</label>
-                        <input type="text" placeholder="Tu nombre de usuario" />
+                        <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="Tu nombre de usuario" />
                     </div>
-
                     <div className="inputGroup">
                         <label>Biografía</label>
-                        <textarea
-                            rows="3"
-                            placeholder="Algo sobre tus entrenamientos..."
-                        ></textarea>
+                        <textarea name="bio" rows="3" value={formData.bio} onChange={handleChange} placeholder="Algo sobre tus entrenamientos..."></textarea>
                     </div>
-
                     <hr className="divider" />
-
-                    <div className="inputGroup">
-                        <label>Nueva Contraseña</label>
-                        <input type="password" placeholder="Mínimo 8 caracteres" />
-                    </div>
-                    <Link to="/profile" className="cancelBtn">
-                        <button type="submit" className="saveBtn">
-                            Guardar
-                        </button>
-                    </Link>
+                    <button type="submit" className="saveBtn">Guardar Cambios</button>
                 </form>
             </div>
 
             <div className="singleCard">
-                <h2 className="title">Datos de atleta</h2>
-                {/* FORMULARIO ÚNICO */}
-                <form className="form">
+                <h2 className="title">Datos de Atleta</h2>
+                <form className="form" onSubmit={handleSubmit}>
                     <div className="inputGroup">
-                        <label>Altura</label>
-                        <input type="text" placeholder="Tu altura en cm" />
+                        <label>Altura (cm)</label>
+                        <input type="number" name="height" value={formData.height} onChange={handleChange} placeholder="180" />
                     </div>
-
                     <div className="inputGroup">
-                        <label>Peso</label>
-                        <input type="text" placeholder="Tu peso en kg" />
+                        <label>Peso (kg)</label>
+                        <input type="number" name="weight" value={formData.weight} onChange={handleChange} placeholder="85" />
                     </div>
-
                     <div className="inputGroup">
                         <label>Ejercicio principal</label>
-                    <select className="form-select" aria-label="Default select example" placeholder="Elige tu ejercicio principal">
-                        <option selected> Selecciona una opción </option>
-                        <option value="1">Clean</option>
-                        <option value="2">Snatch</option>
-                        <option value="3">Deadlift</option>
-                    </select>
+                        <select className="form-select" name="main_exercise" value={formData.main_exercise} onChange={handleChange}>
+                            <option value="">Selecciona una opción</option>
+                            <option value="Clean">Clean</option>
+                            <option value="Snatch">Snatch</option>
+                            <option value="Deadlift">Deadlift</option>
+                        </select>
                     </div>
-                    
-
-                    <div className="inputGroup">
-                        <label>Gimnasio</label>
-                        <input type="text" placeholder="¿Dónde entrenas?" />
-                    </div>
-
-                    <Link to="/profile" className="cancelBtn">
-                        <button type="submit" className="saveBtn">
-                            Guardar todo
-                        </button>
-                    </Link>
+                    <button type="submit" className="saveBtn">Actualizar Atleta</button>
                 </form>
             </div>
         </div>
     );
-}
+};
