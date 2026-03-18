@@ -45,7 +45,7 @@ export const Navbar = () => {
             <nav className="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top shadow">
                 <div className="container">
                     <Link className="navbar-brand" to="/">
-                        <img src={logo} alt="Logo" className="logo-img" style={{ height: "50px" }} />
+                        <img src={logo} alt="Logo" className="logo-img" style={{ height: "100px" }} />
                     </Link>
 
                     <div className="ms-auto">
