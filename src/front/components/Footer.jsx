@@ -1,73 +1,54 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const Footer = () => (
-	<footer className="footer bg-black pt-5 pb-3 ">
-		<div className="container">
-			<div className="row">
-				<div className="col-12 col-md-4 mb-3">
-					<div className="card h10 bg-dark text-white border-secondary tarjeta-footer">
-						<div className="card-body d-flex flex-column">
-							<h5 className="card-title text-danger font-oswald ">SOBRE NOSOTROS</h5>
-							<p className="card-text small text-secondary">Somos un grupo de programadores junior el cual ha
-								desarrollado este Wod's generator para llevar tus entrenamientos a otro nivel.</p>
-							<Link to={"/aboutus"} className="btn btn-outline-danger btn-sm">
-								CONOCENOS
-							</Link>
+export const Footer = () => {
 
+	return (
+		<footer className="py-5 mt-5" style={{ background: 'linear-gradient(to bottom, transparent, #050505)' }}>
+			<div className="container">
+				{/* Línea de separación con un toque rojo neón */}
+				<div style={{ height: '1px', background: 'linear-gradient(to right, transparent, #dc3545, transparent)', opacity: 0.3 }} className="mb-5"></div>
 
-						</div>
-
+				<div className="row g-4 text-center text-md-start">
+					<div className="col-md-4">
+						<h5 className="font-oswald text-white mb-4">SOBRE NOSOTROS</h5>
+						<p className="text-secondary small lh-lg">
+							Somos un equipo apasionado por el CrossFit. Hemos diseñado este generador para que solo te preocupes de una cosa: **superar tu marca.**
+						</p>
+						<Link
+							to="/Aboutus"
+							className="btn-outline-custom d-inline-block text-decoration-none py-2 px-4 mt-2"
+							style={{ fontSize: '0.8rem' }}
+						>
+							CONÓCENOS
+						</Link>
 					</div>
 
-
-				</div>
-
-			
-				<div className="col-12 col-md-4 mb-3">
-					<div className="card h10 bg-dark text-white border-secondary tarjeta-footer">
-						<div className="card-body d-flex flex-column">
-							<h5 className="card-title text-danger font-oswald ">Contacto</h5>
-							<p className="small mb-1"><i className="fas fa-map-marker-alt text-danger me-2"></i> Calle del Box, 12, Madrid</p>
-                            <p className="small mb-1"><i className="fas fa-envelope text-danger me-2"></i> info@wodgenerator.com</p>
-                            <p className="small"><i className="fas fa-phone text-danger me-2"></i> +34 600 000 000</p>
-
+					<div className="col-md-4 text-md-center">
+						<h5 className="font-oswald text-white mb-4">CONTACTO</h5>
+						<div className="text-secondary small">
+							<p className="mb-1"><i className="fas fa-envelope text-danger me-2"></i> info@wodgenerator.com</p>
+							<p><i className="fas fa-map-marker-alt text-danger me-2"></i> Madrid, Spain</p>
 						</div>
-
 					</div>
 
-
-				</div>
-
-			
-			
-				<div className="col-12 col-md-4 mb-3">
-					<div className="card h10 bg-dark text-white border-secondary tarjeta-footer">
-						<div className="card-body d-flex flex-column">
-							<h5 className="card-title text-danger font-oswald ">RSS</h5>
-							<div className="d-flex justify-content-around">
-                                    
-                                    <a href="#" className="text-white fs-3 icono-footer"><i className="fab fa-instagram"></i></a>
-                                    <a href="#" className="text-white fs-3 icono-footer"><i className="fab fa-facebook"></i></a>
-                                    <a href="#" className="text-white fs-3 icono-footer"><i className="fab fa-github"></i></a>
-                                    <a href="#" className="text-white fs-3 icono-footer"><i className="fab fa-linkedin"></i></a>
-                                </div>
-
-
+					<div className="col-md-4 text-md-end">
+						<h5 className="font-oswald text-white mb-4">SÍGUENOS</h5>
+						<div className="d-flex justify-content-center justify-content-md-end gap-3">
+							{/* Iconos con círculo sutil */}
+							<a href="#" className="social-pill"><i className="fab fa-instagram"></i></a>
+							<a href="#" className="social-pill"><i className="fab fa-github"></i></a>
+							<a href="#" className="social-pill"><i className="fab fa-linkedin"></i></a>
 						</div>
-
 					</div>
-
-
 				</div>
 
+				<div className="mt-5 pt-4 text-center border-top border-white border-opacity-10">
+					<p className="text-secondary extra-small opacity-50">
+						© 2024 WOD GENERATOR — ELITE PROGRAMMING — GRUPO 4
+					</p>
+				</div>
 			</div>
-			<div className="text-center mt-4 border-top border-secondary pt-3">
-                    <p className="text-secondary small mb-0">
-                        © 2024 WOD GENERATOR - Proyecto Full Stack - Grupo 4
-                    </p>
-                </div>
-
-		</div>
-	</footer>
-);
+		</footer>
+	);
+};

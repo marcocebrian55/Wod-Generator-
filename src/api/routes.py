@@ -325,8 +325,8 @@ def create_workout():
         user_id=data.get("user_id")
     )
     db.session.add(new_workout)
-    db.session.flush()  # para obtener el id antes de hacer commit
-
+    db.session.flush()  
+    
     for exercise in data.get("exercises"):
         new_relation = WorkoutExercise(
             workout_id=new_workout.id,
@@ -402,7 +402,11 @@ def handle_generate_workout():
     data = request.get_json()
 
     muscle_id = data.get("muscle_id")
-    max_time = data.get("max_time")
+    try:
+        max_time = int(data.get("max_time"))
+    except (TypeError, ValueError):
+        return jsonify({"msg": "El tiempo máximo debe ser un número válido"}), 400
+    
     equipment_ids = data.get("equipment_ids", [])
     workout_name = data.get("name") or "Rutina Auto"
 

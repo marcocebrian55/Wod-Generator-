@@ -18,14 +18,34 @@ def generate_workout(user_id, muscle_id, equipment_ids, max_time, workout_name):
 
     if not posibles_exercises:
         return None
+    
+    complementos = []
+    if max_time > 30:
+        query_comp = Exercise.query.filter(Exercise.muscles.any(Muscle.name.in_(['Cardio', 'Abs', 'Abdominales'])))
+        if equipment_ids:
+            query_comp = query_comp.filter((Exercise.equipments.any(Equipment.id.in_(equipment_ids))) | (db.not_(Exercise.equipments.any())))
+        complementos = query_comp.all()
 
-    cantidad_ejercicios = max(1, max_time // 10)
+    cantidad_ejercicios = max(1, max_time // 8)
 
-    if len(posibles_exercises) > cantidad_ejercicios:
-        seleccionados = random.sample(
-            posibles_exercises, k=cantidad_ejercicios)
+
+    seleccionados = []
+    
+    num_principales = cantidad_ejercicios // 2 if max_time > 30 else cantidad_ejercicios
+    
+    if len(posibles_exercises) > num_principales:
+        seleccionados = random.sample(posibles_exercises, k=num_principales)
     else:
-        seleccionados = posibles_exercises
+        seleccionados = posibles_exercises[:]
+
+
+
+    if len(seleccionados) < cantidad_ejercicios and complementos:
+        extras = [e for e in complementos if e not in seleccionados]
+        faltan = cantidad_ejercicios - len(seleccionados)
+        seleccionados.extend(random.sample(extras, k=min(len(extras), faltan)))
+
+        
 
     es_crossfit = False
     for ex in seleccionados:

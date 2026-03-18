@@ -104,6 +104,7 @@ export const RegisterModal = ({ show, onClose, openLogin }) => {
                                 type="text"
                                 name="username"
                                 placeholder="Nombre de usuario"
+                                placeholder="Nombre Completo"
                                 className="form-control auth-input"
                                 onChange={handleChange}
                                 value={formData.username}

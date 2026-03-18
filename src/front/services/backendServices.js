@@ -42,6 +42,11 @@ export const loginUser = async (data) => {
         });
 
         const result = await response.json();
+        if (response.ok && result.token) {
+            localStorage.setItem("token", result.token); 
+            
+            console.log("Sesión iniciada: Token guardado en el navegador.");
+        }
 
         return result;
 
