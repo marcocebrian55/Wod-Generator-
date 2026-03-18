@@ -12,7 +12,15 @@ export const RegisterModal = ({ show, onClose, openLogin }) => {
         confirmPassword: ""
     });
 
+    const [error, setError] = useState("")
+    const [success, setSuccess] = useState("");
+    const [loading, setLoading] = useState(false);
+
     const handleChange = (e) => {
+
+        if (error) setError("");
+        if (success) setSuccess("");
+
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
@@ -21,11 +29,27 @@ export const RegisterModal = ({ show, onClose, openLogin }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError("")
 
-        if (formData.password !== formData.confirmPassword) {
-            alert("Las contraseñas no coinciden");
+        if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
+            setError("Todos los campos son obligatorios");
             return;
         }
+
+        if (formData.password !== formData.confirmPassword) {
+            setError("Las contraseñas no coinciden");
+            return;
+        }
+
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
+        if (!passwordRegex.test(formData.password)) {
+            setError("La contraseña debe tener mínimo 8 caracteres, incluir mayúsculas, minúsculas, un número y un carácter especial");
+            return;
+        }
+
+        setLoading(true);
 
         const response = await registerUser({
             email: formData.email,
@@ -34,13 +58,20 @@ export const RegisterModal = ({ show, onClose, openLogin }) => {
 
         if (response.error) {
 
-            alert(response.error);
+            setError(response.error);
+            setLoading(false);
 
         } else {
 
-            alert("Usuario creado correctamente");
+            setError("");
+            setSuccess("Usuario creado correctamente 🎉");
 
-            onClose();
+            setTimeout(() => {
+                setSuccess("");
+                setLoading(false);
+                onClose();
+                openLogin();
+            }, 2000);
 
         }
     };
@@ -62,14 +93,22 @@ export const RegisterModal = ({ show, onClose, openLogin }) => {
                 <img src={logo} className="auth-logo" />
 
                 <div className="auth-body">
+                    {error && (
+                        <div className="auth-error" role="alert">
+                            {error}
+                        </div>
+                    )}
 
+                    {success && (
+                        <div className="auth-success" role="alert">
+                            {success}
+                        </div>
+                    )}
                     <h3 className="auth-title">
                         Regístrate
                     </h3>
 
-                    <p className="text-center mb-3">
-                        Crea una Cuenta
-                    </p>
+
 
                     <form onSubmit={handleSubmit}>
 
@@ -114,6 +153,7 @@ export const RegisterModal = ({ show, onClose, openLogin }) => {
                                 onChange={handleChange}
                                 required
                             />
+                            
 
                         </div>
 
@@ -132,8 +172,14 @@ export const RegisterModal = ({ show, onClose, openLogin }) => {
 
                         </div>
 
-                        <button className="btn auth-btn">
-                            Crear Cuenta
+                        <button className="btn auth-btn" disabled={loading}>
+                            {loading ? (
+                                <>
+                                    <span className="auth-spinner"></span> Creando...
+                                </>
+                            ) : (
+                                "Crear Cuenta"
+                            )}
                         </button>
 
                     </form>
@@ -152,7 +198,7 @@ export const RegisterModal = ({ show, onClose, openLogin }) => {
 
                     </p>
 
-                    
+
 
                 </div>
 

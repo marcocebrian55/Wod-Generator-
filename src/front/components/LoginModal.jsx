@@ -3,17 +3,26 @@ import { loginUser } from "../services/backendServices";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/img/Logo-png.png";
 import "../styles/auth.css";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
 export const LoginModal = ({ show, onClose, openRegister }) => {
 
+
+
     const navigate = useNavigate();
+    const { dispatch } = useGlobalReducer();
 
     const [formData, setFormData] = useState({
         email: "",
         password: ""
     });
 
+    const [error, setError] = useState("");
+
     const handleChange = (e) => {
+
+        if (error) setError("");
+
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
@@ -27,7 +36,12 @@ export const LoginModal = ({ show, onClose, openRegister }) => {
 
         if (response.token) {
 
-            localStorage.setItem("token", response.token);
+            setError("");
+
+            dispatch({
+                type: "login",
+                payload: response.token
+            });
 
             onClose();
 
@@ -35,7 +49,7 @@ export const LoginModal = ({ show, onClose, openRegister }) => {
 
         } else {
 
-            alert("Credenciales incorrectas");
+            setError(response.error || "Credenciales incorrectas");
 
         }
     };
@@ -56,6 +70,12 @@ export const LoginModal = ({ show, onClose, openRegister }) => {
                 <img src={logo} className="auth-logo" />
 
                 <div className="auth-body">
+
+                    {error && (
+                        <div className="auth-error">
+                            {error}
+                        </div>
+                    )}
 
                     <h3 className="auth-title">
                         Iniciar Sesión
@@ -110,7 +130,7 @@ export const LoginModal = ({ show, onClose, openRegister }) => {
                         </span>
                     </p>
 
-                    
+
 
                 </div>
 
