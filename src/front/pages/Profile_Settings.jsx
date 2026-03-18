@@ -80,7 +80,7 @@ export const Profile_Settings = () => {
                     </div>
                     <Link to="/profile" className="cancelBtn">
                         <button type="submit" className="saveBtn">
-                            Guardar todo
+                            Guardar
                         </button>
                     </Link>
                 </form>
