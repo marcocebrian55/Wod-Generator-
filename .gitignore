@@ -73,10 +73,12 @@ dist/*
 !.eslintrc
 !.env.example
 .now
-
+.env
 # backend stuff
 .venv
 database.database
 database.db
 diagram.png
 __pycache__/
+migrations
+.vscode/
