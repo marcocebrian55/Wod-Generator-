@@ -12,7 +12,7 @@ export function CarrousellWorkouts() {
     return (
         <div className="seccion-comunidad-video">
             <video autoPlay loop muted playsInline className="video-background">
-                <source src="src/front/assets/grok-video-b46067dd-4a25-42a3-b16e-710f32f0ccb3.mp4" type="video/mp4" />
+                <source src="/grok-video-b46067dd-4a25-42a3-b16e-710f32f0ccb3.mp4" type="video/mp4" />
             </video>
         <div className="caja-deslizable">
             {listaWods.map(function (item) {

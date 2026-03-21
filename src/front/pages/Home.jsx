@@ -64,7 +64,7 @@ export const Home = () => {
                                     objectFit: 'cover', height: '450px', width: '100%'
                                 }}
                             >
-                                <source src="src/front/assets/videocrossfit.MP4" type="video/mp4" />
+                                <source src="/videocrossfit.MP4" type="video/mp4" />
                             </video>
                         </div>
                     </div>
