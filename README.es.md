@@ -1,20 +1,47 @@
-# Plantilla de WebApp con React JS y Flask API
+# WOD-GENERATOR - Full Stack Web Application
 
-Construye aplicaciones web usando React.js para el front end y python/flask para tu API backend.
+[![Stack](https://img.shields.io/badge/Stack-Full%20Stack-blue)](#)
+[![Tech](https://img.shields.io/badge/React-2023-%2361DAFB?logo=react)](#)
+[![Tech](https://img.shields.io/badge/Python-Flask-%233776AB?logo=python)](#)
 
-- La documentación se puede encontrar aquí: https://4geeks.com/docs/start/react-flask-template
-- Aquí hay un video sobre [cómo usar esta plantilla](https://www.youtube.com/watch?v=qBz6Ddd2m38)
-- Integrado con Pipenv para la gestión de paquetes.
-- Despliegue rápido a Render [en solo unos pocos pasos aquí](https://4geeks.com/es/docs/start/despliega-con-render-com).
-- Uso del archivo .env.
-- Integración de SQLAlchemy para la abstracción de bases de datos.
+## 🚀 Descripción del Proyecto
+## 🚀 Descripción del Proyecto
+WOD-GENERATOR es una plataforma diseñada para democratizar el entrenamiento de alta intensidad (**CrossFit y Hyrox**). La aplicación permite a los usuarios generar rutinas de entrenamiento personalizadas de forma automática, eliminando la dependencia de un entrenador personal y adaptándose a cualquier horario o equipamiento disponible.
 
-### 1) Instalación:
+**¿Por qué este proyecto?** Buscábamos resolver la falta de autonomía del atleta medio, permitiéndole entrenar con rigor técnico y variedad de ejercicios desde cualquier lugar.
 
-> Si usas Github Codespaces (recomendado) o Gitpod, esta plantilla ya vendrá con Python, Node y la base de datos Posgres instalados. Si estás trabajando localmente, asegúrate de instalar Python 3.10, Node.
+---
 
-Se recomienda instalar el backend primero, asegúrate de tener Python 3.10, Pipenv y un motor de base de datos (se recomienda Posgres).
+## 🛠️ Stack Tecnológico
 
+### Frontend:
+* **React.js**: Construcción de interfaces basadas en componentes reutilizables.
+* **Context API**: Gestión de estado global de la aplicación siguiendo el patrón Flux.
+* **Bootstrap**: Maquetación responsive y diseño adaptativo.
+
+### Backend:
+* **Python & Flask**: API REST robusta para el manejo de lógica de negocio.
+* **SQLAlchemy & PostgreSQL**: Modelado de datos relacional y persistencia.
+* **JWT (JSON Web Tokens)**: Implementación de autenticación y autorización segura.
+
+---
+
+## 🌟 Funcionalidades Clave
+* **Sistema de Autenticación**: Registro de usuarios, inicio de sesión y protección de rutas privadas mediante tokens.
+* **Gestión de Datos (CRUD)**: Creación, lectura, actualización y borrado de registros directamente en la base de datos.
+* **Dashboard Dinámico**: Visualización de datos en tiempo real consumiendo nuestra propia API interna.
+* **Responsive Design**: Optimizado para una experiencia fluida tanto en móviles como en escritorio.
+
+---
+
+## ⚙️ Instalación y Configuración
+
+Sigue estos pasos para desplegar el entorno de desarrollo localmente:
+
+### 1. Clonar el repositorio
+```bash
+git clone [https://github.com/marcocebrian55/PROYECTO_GRUPO_4](https://github.com/marcocebrian55/PROYECTO_GRUPO_4)
+cd PROYECTO_GRUPO_4
 1. Instala los paquetes de python: `$ pipenv install`
 2. Crea un archivo .env basado en el .env.example: `$ cp .env.example .env`
 3. Instala tu motor de base de datos y crea tu base de datos, dependiendo de tu base de datos, debes crear una variable DATABASE_URL con uno de los valores posibles, asegúrate de reemplazar los valores con la información de tu base de datos:
@@ -70,12 +97,4 @@ Cada entorno de Github Codespace tendrá **su propia base de datos**, por lo que
 1. Instala los paquetes: `$ npm install`
 2. ¡Empieza a codificar! inicia el servidor de desarrollo de webpack `$ npm run start`
 
-## ¡Publica tu sitio web!
 
-Esta plantilla está 100% lista para desplegarse con Render.com y Heroku en cuestión de minutos. Por favor, lee la [documentación oficial al respecto](https://4geeks.com/docs/start/deploy-to-render-com).
-
-### Contribuyentes
-
-Esta plantilla fue construida como parte del [Coding Bootcamp](https://4geeksacademy.com/us/coding-bootcamp) de 4Geeks Academy por [Alejandro Sanchez](https://twitter.com/alesanchezr) y muchos otros contribuyentes. Descubre más sobre nuestro [Curso de Desarrollador Full Stack](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer) y [Bootcamp de Ciencia de Datos](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning).
-
-Puedes encontrar otras plantillas y recursos como este en la [página de github de la escuela](https://github.com/4geeksacademy/).
